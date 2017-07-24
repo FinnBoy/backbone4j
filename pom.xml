@@ -20,8 +20,8 @@
         <module>util</module>
         <module>i18n</module>
         <module>ex</module>
-        <module>core</module>
         -->
+        <module>core</module>
     </modules>
 
     <properties>
