@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.awaken</groupId>
         <artifactId>backbone4j</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -29,6 +29,8 @@
     </modules>
 
     <properties>
+
+        <!--<site.basedir>${project.parent.basedir}</site.basedir>-->
 
         <!-- # framework version # -->
         <f.v.tomcat.version>7.0.59</f.v.tomcat.version>

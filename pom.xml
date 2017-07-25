@@ -7,11 +7,11 @@
 
     <groupId>com.awaken</groupId>
     <artifactId>backbone4j</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
-    <url>https://github.com/FinnBoy/backbone4j</url>
+    <!--<url>https://github.com/FinnBoy/backbone4j</url>-->
     <description>backbone for java.</description>
 
     <modules>
