@@ -30,12 +30,13 @@ keytool -list -keystore backbone4j.keystore
 params:
     -keystore: 指定某一证书库名，以查看。
     -v: 看到更详细的内容。
+    -rfc: 将以可打印的编码格式输出证书条目。
     -alias: 查看某一条目名的证书
 
 eof
 
 :<<eof
-3。从密钥库中导出条目到证书文件
+3。从密钥库中导出条目，来生成证书文件
 keytool -export -alias web -file web.crt -keystore backbone4j.keystore
 将名为backbone4j.keystore的证书库中别名为web的证书条目导出到证书文件web.crt中
 
