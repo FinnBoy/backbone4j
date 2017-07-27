@@ -33,7 +33,6 @@ params:
     -alias: 查看某一条目名的证书
 
 eof
-keytool -list -keystore backbone4j.keystore
 
 :<<eof
 3。从密钥库中导出条目到证书文件
@@ -41,15 +40,13 @@ keytool -export -alias web -file web.crt -keystore backbone4j.keystore
 将名为backbone4j.keystore的证书库中别名为web的证书条目导出到证书文件web.crt中
 
 eof
-keytool -export -alias web -file web.crt -keystore backbone4j.keystore
 
 :<<eof
 4。导入证书文件的信息到密钥库
-keytool -import -keystore backbone4j -file web.crt
+keytool -import -keystore backbone4j.keystore -file web.crt
 将证书文件web.crt导入到名为backbone4j的证书库中。
 
 eof
-keytool -import -keystore backbone4j -file web.crt
 
 :<<eof
 5。查看证书文件信息
@@ -57,7 +54,6 @@ keytool -printcert -file web.crt
 查看证书文件web.crt的信息
 
 eof
-keytool -printcert -file web.crt
 
 :<<eof
 6。删除密钥库中的条目
@@ -65,7 +61,6 @@ keytool -delete -keystore backbone4j.keystore -alias web
 删除密钥库backbone4j中名为web的条目
 
 eof
-keytool -delete -keystore backbone4j.keystore -alias web
 
 :<<eof
 7。修改密钥库条目的口令
