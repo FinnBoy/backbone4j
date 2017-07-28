@@ -7,7 +7,7 @@
 keytool -genkeypair
 不仅生成密钥对，同时对公钥包装，生成自签名的证书。
 
-keytool -genkeypair -alias fRoot -keyalg RSA -keystore backbone4j.keystore
+keytool -genkeypair -alias root -keyalg RSA -keystore backbone4j.keystore
 创建一个别名为fRoot的证书条目，该条目存放在名为backbone4j.keystore的密钥库中，若backbone4j.keystore密钥库不存在则创建。
 params：
     -genkeypair：生成一对非对称密钥
@@ -20,7 +20,7 @@ PS：
     -alias XXX 用于对新建的密钥对条目进行命名。
     密钥对条目保存在keystore中
 !
-keytool -genkeypair -alias fRoot -keyalg RSA -keystore backbone4j.keystore
+keytool -genkeypair -alias root -keyalg RSA -keystore backbone4j.keystore
 
 :<<eof
 2。查看密钥库条目
@@ -37,7 +37,10 @@ eof
 
 :<<eof
 3。从密钥库中导出条目，来生成证书文件
+
 keytool -export -alias web -file web.crt -keystore backbone4j.keystore
+keytool -exportcert -alias web -file web.crt -keystore backbone4j.keystore
+
 将名为backbone4j.keystore的证书库中别名为web的证书条目导出到证书文件web.crt中
 
 eof
