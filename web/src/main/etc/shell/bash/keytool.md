@@ -1,3 +1,5 @@
+
+
 ##Synopsis
 
 keytool *[commands]*
@@ -247,7 +249,7 @@ keytool -importcert -trustcacerts -alias www.mydomain.com -file /tmp/my.cer -key
 
 ---
 
-##证书条目类型
+##Java keystore证书条目类型
 
 * trustedCertEntry
     
@@ -256,3 +258,60 @@ keytool -importcert -trustcacerts -alias www.mydomain.com -file /tmp/my.cer -key
 * PrivateKeyEntry
     
     > 在密钥库生成的证书和密钥
+
+
+---
+
+##相关知识
+
+> <mark>_**X.509**_</mark> 是由国际电信联盟（ITU-T）制定的 <mark>_**数字证书标准**_</mark> 。
+
+> <mark>_**PKCS**_</mark> 是由美国RSA数据安全公司及其合作伙伴制定的一组 <mark>_**公钥密码学标准**_</mark> ，其中包括证书申请、证书更新、证书作废表发布、扩展证书内容以及数字签名、数字信封的格式等方面的一系列相关协议。
+
+> X509就是数字证书的标准，规定了数字证书的格式。PKCS，全称是公钥密码标准，总的来说这些标准就是规范指导人们使用公钥算法，大家都遵守一个标准使用起来才没有歧义，pkcs系列实际上最初就是RSA公司(rsa算法发明后申请了专利，成立的公司，当然现在专利已经到期)为了推广使用RSA公钥算法所拟定的标准，后来被大家广泛接受。举个最简单的例子，RSA算法加密一段消息时可能需要补齐(padding)，怎么补有很多种方法，如果没有一个统一标准，大家使用rsa加密数据就无法互通，PKCS#1就是规定了如何做这个padding，还有比如PKCS#8规定了私钥文件如何加密保存等问题。
+
+--
+
+> 以下提供了一些证书之间的转换方法：
+
+> 1. 将JKS转换成PFX
+
+>     可以使用Keytool工具，将JKS格式转换为PFX格式。
+
+>     ````
+>     keytool -importkeystore -srckeystore D:\server.jks 
+>     -destkeystore D:\server.pfx -srcstoretype JKS -deststoretype PKCS12
+>     ````
+
+> 2. 将PFX转换为JKS
+
+>     可以使用Keytool工具，将PFX格式转换为JKS格式。
+
+>     ````
+>     keytool -importkeystore -srckeystore D:\server.pfx 
+>     -destkeystore D:\server.jks -srcstoretype PKCS12 -deststoretype JKS
+>     ````
+
+> 3. 将PEM/KEY/CRT转换为PFX
+
+>     使用OpenSSL工具，可以将密钥文件KEY和公钥文件CRT转化为PFX文件。
+
+>     将密钥文件KEY和公钥文件CRT放到OpenSSL目录下，打开OpenSSL执行以下命令：
+
+>     ````
+>     openssl pkcs12 -export -out server.pfx -inkey server.key -in server.crt
+>     ````
+
+> 4. 将PFX转换为PEM/KEY/CRT
+
+>     使用OpenSSL工具，可以将PFX文件转化为密钥文件KEY和公钥文件CRT。
+
+>     将PFX文件放到OpenSSL目录下，打开OpenSSL执行以下命令：
+
+>         openssl pkcs12 -in server.pfx -nodes -out server.pem
+
+>         openssl rsa -in server.pem -out server.key
+
+> ** 请注意 ** 此步骤是专用于使用keytool生成私钥和CSR申请证书，并且获取到pem格式证书公钥的情况下做分离私钥使用的，所以在实际部署证书时请使用此步骤分离出来的私钥和申请下来的公钥证书做匹配使用。
+
+> 云盾证书服务统一使用 PEM 格式的数字证书文件。
