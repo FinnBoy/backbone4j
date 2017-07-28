@@ -147,7 +147,7 @@ keytool -certreq -alias www.mydomain.com -keystore ~/my.keystore -file /tmp/my.c
 
 导出CSR文件后，便可以到VeriSign、GeoTrust等权威机构进行证书认证了。
 
-通过keytool，我们也可以使用私有的根证书来给CSR文件颁发证书。
+**通过keytool，我们也可以使用私有的根证书来给CSR文件颁发证书。**
 
 ####根据CSR文件（颁发／创建）证书
 
@@ -183,6 +183,7 @@ keytool -importcert -trustcacerts -alias www.mydomain.com -file /tmp/my.cer -key
 导入后使用`keytool -list -v -alias www.mydomain.com -keystore ~/my.keystore`查看，会看到完整的证书链。
 
 ---
+
 ##Sample
 
 ````
@@ -206,3 +207,52 @@ keytool -importcert -trustcacerts -alias www.mydomain.com -file /tmp/my.cer -key
     keytool -importcert -trustcacerts -alias clientpms -file pms.cer -keystore backbone4j.keystore
 
 ````
+
+---
+
+##keystore格式类型(-storetype)
+
+- JKS
+    
+    * 扩展名：.jks / .ks
+    * 描述：[Java Keystore]密钥库的Java实现版本，provider为SUN
+    * 特点：密钥库和私钥用不同的密码进行保护
+    
+- JCEKS
+    
+    * 扩展名：.jce
+    * 描述：[JCE Keystore]密钥库的JCE实现版本，provider为SUN JCE
+    * 特点：相对于JKS安全级别更高，保护Keystore私钥时采用TripleDES
+    
+- PKCS12
+    
+    * 扩展名：.p12 / .pfx
+    * 描述：[PKCS #12]个人信息交换语法标准
+    * 特点：
+        1. 包含私钥、公钥及其证书
+        2. 密钥库和私钥用相同密码进行保护
+    
+- BKS
+    
+    * 扩展名：.bks
+    * 描述：Bouncycastle Keystore]密钥库的BC实现版本，provider为BC
+    * 特点：基于JCE实现
+    
+- UBER
+    
+    * 扩展名：.ubr
+    * 描述：[Bouncycastle UBER Keystore]密钥库的BC更安全实现版本，provider为BC
+    * 特点：
+    
+
+---
+
+##证书条目类型
+
+* trustedCertEntry
+    
+    > 表示由外部导入到密钥库中的、受信任的证书
+
+* PrivateKeyEntry
+    
+    > 在密钥库生成的证书和密钥
