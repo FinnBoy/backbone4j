@@ -12,21 +12,38 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>parent</artifactId>
+    <artifactId>b-parent</artifactId>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
 
     <modules>
-        <!--
-        <module>base</module>
-        <module>util</module>
-        <module>i18n</module>
-        <module>ex</module>
-        -->
         <module>../core</module>
         <module>../web</module>
     </modules>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-jsp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+        </dependency>
+
+    </dependencies>
 
     <properties>
 
@@ -34,6 +51,7 @@
 
         <!-- # framework version # -->
         <f.v.tomcat.version>7.0.59</f.v.tomcat.version>
+        <f.v.tomcat.embed.version>7.0.79</f.v.tomcat.embed.version>
         <f.v.jetty.version>7.6.21.v20160908</f.v.jetty.version>
 
         <f.v.jdbc.mysql.version>5.1.18</f.v.jdbc.mysql.version>
@@ -64,20 +82,6 @@
         <!-- log4j2: As of version 2.4, the Log4j 2 API requires Java 7. Versions 2.3 and earlier require Java 6. -->
 
     </properties>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-
-    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -345,6 +349,38 @@
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-ehcache</artifactId>
                 <version>${f.v.shiro.version}</version>
+            </dependency>
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~ tomcat.embed ~~~~~~~~~~~~~~~~~~~~ -->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${f.v.tomcat.embed.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>javax.servlet-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>servlet-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-jasper</artifactId>
+                <version>${f.v.tomcat.embed.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-el</artifactId>
+                <version>${f.v.tomcat.embed.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-logging-juli</artifactId>
+                <version>${f.v.tomcat.embed.version}</version>
             </dependency>
 
         </dependencies>

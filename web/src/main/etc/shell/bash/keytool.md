@@ -1,10 +1,10 @@
 
 
-##Synopsis
+## Synopsis
 
 keytool *[commands]*
 
-####commands
+#### commands
 
 See Commands. These commands are categorized by task as follows:
 
@@ -83,10 +83,10 @@ See Commands. These commands are categorized by task as follows:
 
 ---
 
-##Flow
+## Flow
 
 
-####构建（自签名／根）证书
+#### 构建（自签名／根）证书
 
 在构建CSR之前，需要先在密钥库中生成本地数字证书，此时需要提供用户的身份、加密算法、有效期等一些数字证书的基本信息：
 
@@ -103,7 +103,7 @@ keytool -genkeypair -keyalg RSA -keysize 1024 -sigalg MD5withRSA -validity 365 -
 - -alias `#`证书别名
 - -keystore `#`指定密钥库的位置
 
-####证书导出
+#### 证书导出
 
 执行了上面的命令后，我们已经生成了一个本地数字证书，虽然还没有经过证书认证机构进行认证，但并不影响使用，我们可以使用相应的命令对证书进行导出。
 
@@ -129,7 +129,7 @@ keytool -printcert -file /tmp/my.cer
 - -printcert `#`执行证书打印命令
 - -file `#`指定证书文件路径
 
-####生成并导出CSR文件
+#### 生成并导出CSR文件
 
 如果想得到证书认证机构的认证，需要导出数字证书并签发申请（Cerificate Signing Request），经证书认证机构认证并颁发后，再将认证后的证书导入本地密钥库与信任库。
 
@@ -151,7 +151,7 @@ keytool -certreq -alias www.mydomain.com -keystore ~/my.keystore -file /tmp/my.c
 
 **通过keytool，我们也可以使用私有的根证书来给CSR文件颁发证书。**
 
-####根据CSR文件（颁发／创建）证书
+#### 根据CSR文件（颁发／创建）证书
 
 由CSR创建证书命令
 
@@ -164,7 +164,7 @@ keytool -gencert -alias root -infile my.csr -outfile my.cer -keystore ~/my.keyst
 - -gencert `#`执行颁发证书操作
 - -rfc `#`使用Base64编码格式输出
 
-####证书导入
+#### 证书导入
 
 获得证书认证机构办法的数字证书后，需要将其导入信任库。
 
@@ -186,7 +186,7 @@ keytool -importcert -trustcacerts -alias www.mydomain.com -file /tmp/my.cer -key
 
 ---
 
-##Sample
+## Sample
 
 ````
 
@@ -212,7 +212,7 @@ keytool -importcert -trustcacerts -alias www.mydomain.com -file /tmp/my.cer -key
 
 ---
 
-##keystore格式类型(-storetype)
+## keystore格式类型(-storetype)
 
 - JKS
     
@@ -249,7 +249,7 @@ keytool -importcert -trustcacerts -alias www.mydomain.com -file /tmp/my.cer -key
 
 ---
 
-##Java keystore证书条目类型
+## Java keystore证书条目类型
 
 * trustedCertEntry
     
@@ -262,7 +262,7 @@ keytool -importcert -trustcacerts -alias www.mydomain.com -file /tmp/my.cer -key
 
 ---
 
-##相关知识
+## 相关知识
 
 > <mark>_**X.509**_</mark> 是由国际电信联盟（ITU-T）制定的 <mark>_**数字证书标准**_</mark> 。
 

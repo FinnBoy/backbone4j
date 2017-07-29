@@ -15,12 +15,6 @@
     <description>backbone for java.</description>
 
     <modules>
-        <!--
-        <module>base</module>
-        <module>util</module>
-        <module>i18n</module>
-        <module>ex</module>
-        -->
         <module>parent</module>
     </modules>
 

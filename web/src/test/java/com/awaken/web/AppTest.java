@@ -1,4 +1,4 @@
-package com.awaken.core;
+package com.awaken.web;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
