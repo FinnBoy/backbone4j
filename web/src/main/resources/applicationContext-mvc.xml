@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byName">
+
+    <!-- 自动装配了 RequestMappingHandlerMapping, RequestMappingHandlerAdapter等。 -->
+    <mvc:annotation-driven />
+    <!-- The above registers a RequestMappingHandlerMapping, a RequestMappingHandlerAdapter,
+         and an ExceptionHandlerExceptionResolver (among others) in support of processing requests with annotated
+         controller methods using annotations such as @RequestMapping, @ExceptionHandler, and others. -->
+
+    <!-- 静态资源请求处理 -->
+    <!-- Spring MVC 请求映射配置为"/"时，捕获了所有的请求，包活静态资源的请求。 -->
+    <!-- 但如果Spring MVC 把静态资源的请求，当成普通请求处理，去找对应的Controller处理器时，由于找不到对应处理器将导致错误。 -->
+    <!-- mvc:resources 的功能，就是处理静态资源的映射。 -->
+    <mvc:resources mapping="/resources/js/**" location="/js/" />
+    <mvc:resources mapping="/resources/css/**" location="/css/" />
+    <mvc:resources mapping="/resources/images/**" location="/images/" />
+    <mvc:resources mapping="/resources/publicResources/**" location="classpath:/publicResources/" />
+
+    <!-- 不经过Controller处理器，直接交给相应的视图解析器、将相应的文件（jsp）解析为视图显示给浏览器。 -->
+    <!-- path只能对应单个请求映射，不支持通配符？ -->
+    <!-- 需要保证已配置相应的视图解析器，否则只配置mvc:view-controller时无效？ -->
+    <mvc:view-controller path="/view/init" view-name="/view/init" />
+    <mvc:view-controller path="/view/r/init" view-name="redirect:/view/init" />
+
+    <context:component-scan base-package="com.awaken.web.controller" />
+
+    <!-- 以下专用功能的Bean，Spring在初始化时设定了一批默认的Bean。 -->
+    <!-- 如果Spring User在开发时，通过实现相应功能的接口，自定义了以下类型的Bean，该自定义的Bean会覆盖Spring的默认Bean。 -->
+
+    <!-- 视图解析器 -->
+
+    <!-- Chaining ViewResolvers -->
+
+    <!-- InternalResourceViewResolver is always automatically positioned as the last resolver in the chain. -->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="contentType" value="text/html" />
+        <property name="prefix" value="/WEB-INF/jsp" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+
+
+    <!-- 文件上传处理器 -->
+
+    <!-- By default, Spring does no multipart handling, because some developers want to handle multiparts themselves.-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes: 10M -->
+        <property name="maxUploadSize" value="10485760"/>
+    </bean>
+
+
+
+    <!-- 本地化／国际化处理器 -->
+
+    <!-- 主题处理器 -->
+
+    <!-- 异常控制处理器 -->
+    
+</beans>

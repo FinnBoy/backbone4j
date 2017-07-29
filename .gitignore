@@ -1,3 +1,4 @@
 target/
 core/target/
 web/target/
+core/src/main/resources/applicationContext.properties
