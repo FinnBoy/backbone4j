@@ -33,8 +33,8 @@
     <!-- 不经过Controller处理器，直接交给相应的视图解析器、将相应的文件（jsp）解析为视图显示给浏览器。 -->
     <!-- path只能对应单个请求映射，不支持通配符？ -->
     <!-- 需要保证已配置相应的视图解析器，否则只配置mvc:view-controller时无效？ -->
-    <mvc:view-controller path="/view/init" view-name="/view/init" />
-    <mvc:view-controller path="/view/r/init" view-name="redirect:/view/init" />
+    <mvc:view-controller path="/login" view-name="/login" />
+    <!--<mvc:view-controller path="/view/r/init" view-name="redirect:/view/init" />-->
 
     <context:component-scan base-package="com.awaken.web.controller" />
 
@@ -45,12 +45,45 @@
 
     <!-- Chaining ViewResolvers -->
 
+    <!-- freemarker -->
+    <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="location" value="classpath:freemarker.properties" />
+    </bean>
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <!--<property name="templateLoaderPath" value="/WEB-INF/ftl" />-->
+        <property name="templateLoaderPaths">
+            <list>
+                <value>/WEB-INF/html</value>
+                <value>/WEB-INF/ftl</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="freemarkerSettings" ref="freemarkerConfiguration" />
+    </bean>
+    <bean id="freemarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="suffix" value=".ftl" />
+        <property name="order" value="2" />
+    </bean>
+
+    <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="suffix" value=".html" />
+        <property name="order" value="0" />
+    </bean>
+
     <!-- InternalResourceViewResolver is always automatically positioned as the last resolver in the chain. -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-        <property name="contentType" value="text/html" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
         <property name="prefix" value="/WEB-INF/jsp" />
         <property name="suffix" value=".jsp" />
+        <property name="order" value="10" />
     </bean>
 
 

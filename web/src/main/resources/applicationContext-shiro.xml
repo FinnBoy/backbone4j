@@ -30,7 +30,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
 
-        <property name="loginUrl" value="/login/index"/>
+        <property name="loginUrl" value="/login"/>
         <!-- override these for application-specific URLs if you like:
         <property name="successUrl" value="/home.jsp"/>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/> -->
@@ -49,7 +49,7 @@
         <property name="filterChainDefinitions">
             <value>
                 # some example chain definitions:
-                /login/** = ssl, authc
+                /login = ssl, authc
                 /admin/** = authc, roles[admin]
                 /docs/** = authc, perms[document:read]
                 /** = authc
