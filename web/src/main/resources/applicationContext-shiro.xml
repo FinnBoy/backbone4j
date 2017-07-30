@@ -46,6 +46,7 @@
 
 
         <!-- DefaultFilter -->
+        <!-- setting: url mapping = filter alias -->
         <property name="filterChainDefinitions">
             <value>
                 # some example chain definitions:
@@ -76,7 +77,11 @@
         <property name="port" value="8443" />
     </bean>
     <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
-
+        <property name="successUrl" value="/home" />
+        <property name="usernameParam" value="username" />
+        <property name="passwordParam" value="password" />
+        <property name="rememberMeParam" value="rememberMe" />
+        <property name="failureKeyAttribute" value="failureMessage" />
     </bean>
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
