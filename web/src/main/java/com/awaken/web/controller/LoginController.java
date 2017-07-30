@@ -14,7 +14,7 @@ public class LoginController {
     public String signIn() {
 
         LOG.info("~~~~~~~ signIn ~~~~~~~");
-        return "";
+        return "redirect:/home";
     }
 
     @RequestMapping("/login/signout")

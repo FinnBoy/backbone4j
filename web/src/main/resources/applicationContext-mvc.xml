@@ -35,6 +35,8 @@
     <!-- path只能对应单个请求映射，不支持通配符？ -->
     <!-- 需要保证已配置相应的视图解析器，否则只配置mvc:view-controller时无效？ -->
     <mvc:view-controller path="/login" view-name="/login" />
+    <mvc:view-controller path="/home" view-name="/home" />
+    <mvc:view-controller path="/logout" view-name="/logout" />
     <!--<mvc:view-controller path="/view/r/init" view-name="redirect:/view/init" />-->
 
     <context:component-scan base-package="com.awaken.web.controller" />
