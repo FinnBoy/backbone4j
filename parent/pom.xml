@@ -24,6 +24,7 @@
 
     <dependencies>
 
+        <!-- ******************** Server:jetty ******************** -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-jsp</artifactId>
@@ -33,31 +34,31 @@
             <artifactId>jetty-webapp</artifactId>
         </dependency>
 
+        <!-- ******************** Test:junit ******************** -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-        </dependency>
-
+        <!-- ******************** JDBC:mysql ******************** -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!-- ******************** DS:druid ******************** -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
 
+        <!-- ******************** ORM:Hibernate ******************** -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
 
+        <!-- ******************** Spring ******************** -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
@@ -83,6 +84,7 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
+        <!-- ******************** Auth:shiro ******************** -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
@@ -104,6 +106,7 @@
             <artifactId>shiro-ehcache</artifactId>
         </dependency>
 
+        <!-- ******************** Log api:slf4j ******************** -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
@@ -113,6 +116,7 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
+        <!-- ******************** Log Impl:slf4j ******************** -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-web</artifactId>
@@ -122,9 +126,22 @@
             <artifactId>log4j-slf4j-impl</artifactId>
         </dependency>
 
+        <!-- ******************** Template:freemarker ******************** -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
+        </dependency>
+
+        <!-- ******************** Excel:POI ******************** -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+        </dependency>
+
+        <!-- ******************** Common:fileUpload ******************** -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
         </dependency>
 
     </dependencies>
@@ -166,11 +183,19 @@
         <!-- log4j2: As of version 2.4, the Log4j 2 API requires Java 7. Versions 2.3 and earlier require Java 6. -->
 
         <f.v.freemarker.version>2.3.23</f.v.freemarker.version>
+        <f.v.poi.version>3.10.1</f.v.poi.version>
 
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~ POI(Excel) ~~~~~~~~~~~~~~~~~~~~ -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${f.v.poi.version}</version>
+            </dependency>
 
             <!-- ~~~~~~~~~~~~~~~~~~~~ FreeMarker ~~~~~~~~~~~~~~~~~~~~ -->
             <dependency>

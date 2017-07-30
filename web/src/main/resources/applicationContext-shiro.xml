@@ -49,6 +49,9 @@
         <property name="filterChainDefinitions">
             <value>
                 # some example chain definitions:
+                /resources/** = anon
+                /js/** = anon
+                /css/** = anon
                 /login = ssl, authc
                 /admin/** = authc, roles[admin]
                 /docs/** = authc, perms[document:read]

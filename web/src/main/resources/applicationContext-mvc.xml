@@ -25,10 +25,11 @@
     <!-- Spring MVC 请求映射配置为"/"时，捕获了所有的请求，包活静态资源的请求。 -->
     <!-- 但如果Spring MVC 把静态资源的请求，当成普通请求处理，去找对应的Controller处理器时，由于找不到对应处理器将导致错误。 -->
     <!-- mvc:resources 的功能，就是处理静态资源的映射。 -->
-    <mvc:resources mapping="/resources/js/**" location="/js/" />
-    <mvc:resources mapping="/resources/css/**" location="/css/" />
-    <mvc:resources mapping="/resources/images/**" location="/images/" />
-    <mvc:resources mapping="/resources/publicResources/**" location="classpath:/publicResources/" />
+    <mvc:resources mapping="/resources/js/**" location="./js/" order="1" cache-period="1800" />
+    <mvc:resources mapping="/resources/css/**" location="./css/" order="2" cache-period="1800" />
+    <mvc:resources mapping="/resources/images/**" location="/images/" order="3" cache-period="1800" />
+    <mvc:resources mapping="/resources/publicResources/**" location="classpath:/publicResources/" order="4"
+                   cache-period="1800" />
 
     <!-- 不经过Controller处理器，直接交给相应的视图解析器、将相应的文件（jsp）解析为视图显示给浏览器。 -->
     <!-- path只能对应单个请求映射，不支持通配符？ -->
@@ -66,7 +67,7 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
         <property name="contentType" value="text/html;charset=UTF-8" />
         <property name="suffix" value=".ftl" />
-        <property name="order" value="2" />
+        <property name="order" value="10" />
     </bean>
 
     <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
@@ -74,16 +75,17 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
         <property name="contentType" value="text/html;charset=UTF-8" />
         <property name="suffix" value=".html" />
-        <property name="order" value="0" />
+        <property name="order" value="8" />
     </bean>
 
+    <!-- InternalResourceViewResolver会永远返回一个视图对象，即使没找到相应的视图，所以要将此调用优先级调整最低。 -->
     <!-- InternalResourceViewResolver is always automatically positioned as the last resolver in the chain. -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="contentType" value="text/html;charset=UTF-8" />
         <property name="prefix" value="/WEB-INF/jsp" />
         <property name="suffix" value=".jsp" />
-        <property name="order" value="10" />
+        <property name="order" value="20" />
     </bean>
 
 
