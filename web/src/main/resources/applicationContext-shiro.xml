@@ -29,7 +29,7 @@
          will also not be used. -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-
+        <!-- loginUrl/successUrl/unauthorizedUrl 此三个属性会覆盖[authc]Filter的此三个属性(只在[authc]的三属性未设定时执行) -->
         <property name="loginUrl" value="/login"/>
         <!-- override these for application-specific URLs if you like:
         <property name="successUrl" value="/home.jsp"/>
@@ -41,21 +41,33 @@
         <property name="filters">
             <util:map>
                 <entry key="ssl" value-ref="sslFilter"/>
+                <entry key="authc" value-ref="formAuthenticationFilter" />
             </util:map>
         </property>
-
-
         <!-- DefaultFilter -->
         <!-- setting: url mapping = filter alias -->
+
+        <!-- 所有继承PathMatchingFilter的子类，下面的配置信息会被转换成： -->
+
+        <!--   Filter.appliedPaths(Map)属性的设定模式为： -->
+
+        <!--     /resources/** = anon                          \    [authc] : /docs/** = {array}[0:perm][1:doc:r] -->
+        <!--     /docs/**  = authc[perm, doc:r]                 \             /admin/** = {array} null            -->
+        <!--     /admin/** = authc, roles[admin]                 \            /login/** = {array} null            -->
+        <!--     /login/** = ssl, authc                          /            /** = {array} null                  -->
+        <!--     /logout = logout                               /   [anon]  : /resources/** = {array} null        -->
+        <!--     /** = authc                                   /    [roles] : /admin/** = {array} [0:admin]       -->
+        <!--                                                  /     [ssl]   : /login/** = {array} null            -->
+        <!--                                                 /      [logout]: /logout = {array} null              -->
         <property name="filterChainDefinitions">
             <value>
                 # some example chain definitions:
                 # TODO: /home
                 /resources/** = anon
-                /login/** = ssl
+                /login/** = ssl, authc[permissive]
                 /login = ssl, authc
                 /logout = logout
-                /home = anon
+                /home = authc
                 /** = authc
                 # /admin/** = authc, roles[admin]
                 # /docs/** = authc, perms[document:read]
@@ -76,6 +88,20 @@
     <bean id="sslFilter" class="org.apache.shiro.web.filter.authz.SslFilter">
         <property name="port" value="8443" />
     </bean>
+    <!-- FormAuthenticationFilter Execution Flow: -->
+    <!--     从当前Thread中获取Subject对象，如果未找到，则新建一个Subject对象，并保存到当前线程中。 -->
+    <!--   # 判断获取的Subject对象，authenticated属性是否为True，True表示该对象已被认证（登录），可以进入下一个Filter执行。 -->
+    <!--   # 否则（未认证时），再判断当前Request URL是否为loginUrl，以及 是否设定有 permissive 的角色 -->
+    <!--        即：有配置 /admin/** = authc[permissive] ，并且 loginUrl = /login 的情况时 -->
+    <!--            如果访问的URL为 /admin/update -->
+    <!--         *  则此时 该访问URL 既满足：!= loginUrl，又满足：配置的[permissive] contains "permissive" -->
+    <!--            可以进入下一个Filter执行 -->
+    <!--   # 否则（判定未通过），开始判断 Method:onAccessDenied 的返回值，True表示通过，进入下一个Filter执行。(细节如下说明：) -->
+    <!--     ~ 如果：访问URL = loginUrl，则继续判断，否则 直接 Redirect 到 loginUrl。(Method:isLoginRequest) -->
+    <!--   * ~ 如果：该Request 是一个 POST Request，则继续判断， 否则 直接进入下一个Filter执行。(Method:isLoginSubmission) -->
+    <!--         *  isLoginSubmission Can be overridden by subclasses. -->
+    <!--         *  isLoginSubmission 的 Method 的当前用意，当为 GET 时，意为 访问 login view，POST 时，进行 login authc -->
+    <!--     ~ 如果：(Method:executeLogin) -->
     <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
         <property name="successUrl" value="/home" />
         <property name="usernameParam" value="username" />
@@ -95,6 +121,12 @@
     </bean>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!--
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+
+    </bean>
+    -->
 
     <!-- Define the Shiro Realm implementation you want to use to connect to your back-end -->
     <!-- security datasource: -->
