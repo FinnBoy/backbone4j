@@ -102,6 +102,9 @@
     <!--         *  isLoginSubmission Can be overridden by subclasses. -->
     <!--         *  isLoginSubmission 的 Method 的当前用意，当为 GET 时，意为 访问 login view，POST 时，进行 login authc -->
     <!--     ~ 如果：(Method:executeLogin) -->
+    <!--         *  从当前Thread中获取Subject对象，并将表单内的登录用账户信息生成Token对象。调用 subject.login(token) 执行登录 -->
+    <!--            subject.login(token) 内部委托给 securityManager 执行login操作。-->
+    <!--            securityManager: info = authenticate(token) 内部委托给 authenticator 执行login操作。-->
     <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
         <property name="successUrl" value="/home" />
         <property name="usernameParam" value="username" />
