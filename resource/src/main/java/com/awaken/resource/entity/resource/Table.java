@@ -1,8 +1,12 @@
 package com.awaken.resource.entity.resource;
 
-public class Table {
+import com.awaken.common.entity.SignEntity;
+
+public class Table extends SignEntity {
 
     private Application application;
+
+    private String schema;
 
     private String tableName;
 

@@ -12,5 +12,4 @@ public class Privilege {
 
     private PermissionDivision permissionDivision;
 
-
 }

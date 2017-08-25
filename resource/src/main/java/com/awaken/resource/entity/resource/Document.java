@@ -1,8 +1,8 @@
 package com.awaken.resource.entity.resource;
 
-public class Document {
+import com.awaken.common.entity.SignEntity;
 
-    private Long node;
+public class Document extends SignEntity {
 
     private String name;
 
