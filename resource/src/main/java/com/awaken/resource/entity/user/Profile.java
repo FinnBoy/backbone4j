@@ -1,11 +1,13 @@
 package com.awaken.resource.entity.user;
 
+import com.awaken.common.entity.SignEntity;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "a_profile")
-public class Profile {
+public class Profile extends SignEntity {
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -22,4 +24,28 @@ public class Profile {
             joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "group_id")})
     private Set<Group> groups;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Organization> getOrganizations() {
+        return organizations;
+    }
+
+    public void setOrganizations(Set<Organization> organizations) {
+        this.organizations = organizations;
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
 }
