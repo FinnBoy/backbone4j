@@ -3,13 +3,13 @@ package com.awaken.common.entity;
 import javax.persistence.Column;
 import javax.persistence.Version;
 
-public abstract class VersionEntity extends Entity {
+public abstract class VersionEntity extends IdEntity {
 
     /**
      * 版本号（乐观锁）
      */
     @Version
-    @Column(name = "VERSION")
+    @Column
     private Integer version;
 
     public Integer getVersion() {

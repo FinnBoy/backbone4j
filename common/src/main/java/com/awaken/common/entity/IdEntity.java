@@ -4,7 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public abstract class Entity implements IEntity {
+public abstract class IdEntity implements IEntity {
 
     /**
      * 从数据库当前值 + 1，再插入数据库：在高并发下，会发生同一时间获取到相同值，递增后造成主键重复。
@@ -46,11 +46,11 @@ public abstract class Entity implements IEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Entity)) return false;
+        if (!(o instanceof IdEntity)) return false;
 
-        Entity entity = (Entity) o;
+        IdEntity idEntity = (IdEntity) o;
 
-        return id.equals(entity.id);
+        return id.equals(idEntity.id);
     }
 
     @Override
