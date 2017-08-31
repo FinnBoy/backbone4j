@@ -1,21 +1,19 @@
-package com.awaken.resource.entity.permission;
+package com.awaken.resource.entity.permission.priv;
 
-import com.awaken.resource.constant.PermissionDivision;
+import com.awaken.resource.entity.permission.Privilege;
 import com.awaken.resource.entity.resource.Resource;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
- * 权限（不可再分）
- * <p>参考实现</p>
- * <p>可参考Oracle的权限设计：分成系统权限与对象权限</p>
- * <p>系统权限的级联授予，在被撤销时，级联方的系统权限不会被收回。</p>
- * <p>对象权限的级联授予，在被撤销时，级联方的对象权限会被收回。</p>
+ * 对象权限
  */
 @Entity
-public class Permission {
-
-    private PermissionDivision permissionDivision;
+@Table(name = "a_resource_privilege")
+public class ResourcePrivs extends Privilege {
 
     /**
      * 资源
@@ -33,6 +31,15 @@ public class Permission {
      * 外键值为该条数据的关联数据可以访问，外键值非该条数据的关联数据无法访问）
      * </p>
      */
+    @OneToOne(optional = false)
+    @JoinColumn(name = "resource_id", nullable = false)
     private Resource resource;
 
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
 }

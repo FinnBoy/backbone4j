@@ -1,5 +1,10 @@
 package com.awaken.resource.entity.permission;
 
+import com.awaken.common.entity.SignEntity;
+
+import javax.persistence.*;
+import java.util.Set;
+
 /**
  * 角色（权限的集合）
  * <p>实现参考</p>
@@ -21,5 +26,34 @@ package com.awaken.resource.entity.permission;
  * <p>DSD（动态职责分离）</p>
  * <p>会话与角色之间的约束：运行时角色互斥，用户无法激活拥有的所有角色。</p>
  */
-public class Role {
+@Entity
+@Table(name = "a_role")
+public class Role extends SignEntity {
+
+    @Column
+    private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "a_role_privilege"
+            , joinColumns = {@JoinColumn(name = "role_id")}
+            , inverseJoinColumns = {@JoinColumn(name = "privilege_id")}
+    )
+    private Set<Privilege> privileges;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(Set<Privilege> privileges) {
+        this.privileges = privileges;
+    }
 }

@@ -1,4 +1,4 @@
-package com.awaken.resource.entity.permission;
+package com.awaken.resource.entity.permission.role;
 
 /**
  * 角色关联／包含
