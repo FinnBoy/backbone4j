@@ -1,6 +1,6 @@
 package com.awaken.resource.entity.permission;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -28,7 +28,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "a_role")
-public class Role extends SignEntity {
+public class Role extends IdEntityWithDSV {
 
     @Column
     private String name;

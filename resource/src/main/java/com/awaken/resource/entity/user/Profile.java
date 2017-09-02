@@ -1,13 +1,13 @@
 package com.awaken.resource.entity.user;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "a_profile")
-public class Profile extends SignEntity {
+public class Profile extends IdEntityWithDSV {
 
     @OneToOne
     @JoinColumn(name = "user_id")

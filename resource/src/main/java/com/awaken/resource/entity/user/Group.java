@@ -1,6 +1,6 @@
 package com.awaken.resource.entity.user;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "a_group")
-public class Group extends SignEntity {
+public class Group extends IdEntityWithDSV {
 
     @ManyToMany(mappedBy = "groups")
     private Set<Profile> profiles;

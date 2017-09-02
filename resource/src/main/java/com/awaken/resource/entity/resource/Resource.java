@@ -1,9 +1,9 @@
 package com.awaken.resource.entity.resource;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 import com.awaken.resource.constant.ResourceDivision;
 
-public abstract class Resource extends SignEntity implements IResource {
+public abstract class Resource extends IdEntityWithDSV implements IResource {
 
     private IApplication application;
 

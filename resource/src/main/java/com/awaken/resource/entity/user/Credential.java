@@ -1,6 +1,6 @@
 package com.awaken.resource.entity.user;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "a_credential")
-public class Credential extends SignEntity {
+public class Credential extends IdEntityWithDSV {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")

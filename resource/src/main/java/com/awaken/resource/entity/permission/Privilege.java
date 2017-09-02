@@ -1,6 +1,6 @@
 package com.awaken.resource.entity.permission;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 import com.awaken.resource.constant.PermissionDivision;
 
 import javax.persistence.Column;
@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
  * <p>系统权限的级联授予，在被撤销时，级联方的系统权限不会被收回。</p>
  * <p>对象权限的级联授予，在被撤销时，级联方的对象权限会被收回。</p>
  */
-public abstract class Privilege extends SignEntity {
+public abstract class Privilege extends IdEntityWithDSV {
 
     /**
      * 资源操作类型

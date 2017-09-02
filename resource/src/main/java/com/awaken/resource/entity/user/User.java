@@ -1,6 +1,6 @@
 package com.awaken.resource.entity.user;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "a_user")
-public class User extends SignEntity {
+public class User extends IdEntityWithDSV {
 
     @OneToOne(optional = false, mappedBy = "user")
     private Profile profile;

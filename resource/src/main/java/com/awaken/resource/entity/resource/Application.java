@@ -1,6 +1,6 @@
 package com.awaken.resource.entity.resource;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ import javax.persistence.TableGenerator;
         , pkColumnValue = "R_APPLICATION_PK"
         , allocationSize = 100
 )
-public class Application extends SignEntity implements IApplication {
+public class Application extends IdEntityWithDSV implements IApplication {
 
     @Column
     private String name;

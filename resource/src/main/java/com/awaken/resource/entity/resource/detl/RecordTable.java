@@ -1,6 +1,6 @@
 package com.awaken.resource.entity.resource.detl;
 
-import com.awaken.common.entity.SignEntity;
+import com.awaken.common.entity.IdEntityWithDSV;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "r_record_table")
-public class RecordTable extends SignEntity {
+public class RecordTable extends IdEntityWithDSV {
 
     @OneToMany(mappedBy = "table")
     private Set<Record> records;
