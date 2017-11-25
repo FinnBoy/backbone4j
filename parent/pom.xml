@@ -26,6 +26,11 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+        </dependency>
+
         <!-- ******************** Server:jetty ******************** -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
@@ -187,10 +192,24 @@
         <f.v.freemarker.version>2.3.23</f.v.freemarker.version>
         <f.v.poi.version>3.10.1</f.v.poi.version>
 
+        <f.v.cglib.version>3.2.5</f.v.cglib.version>
+        <f.v.asm.version>3.3.1</f.v.asm.version>
+
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>${f.v.asm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${f.v.cglib.version}</version>
+            </dependency>
 
             <!-- ~~~~~~~~~~~~~~~~~~~~ POI(Excel) ~~~~~~~~~~~~~~~~~~~~ -->
             <dependency>
