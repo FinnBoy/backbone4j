@@ -4,8 +4,8 @@ import com.awaken.common.state.Demand;
 import com.awaken.common.state.Info;
 
 /**
- * 普通的执行操作
+ * 服务
  */
-public interface Operation {
+public interface Service {
     Info execute(Demand demand);
 }
