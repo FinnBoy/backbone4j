@@ -6,6 +6,10 @@ public class AssertException extends RuntimeException {
         super();
     }
 
+    public AssertException(Throwable cause) {
+        super(cause);
+    }
+
     public AssertException(String message) {
         super(message);
     }
@@ -14,7 +18,4 @@ public class AssertException extends RuntimeException {
         super(message, cause);
     }
 
-    public AssertException(Throwable cause) {
-        super(cause);
-    }
 }

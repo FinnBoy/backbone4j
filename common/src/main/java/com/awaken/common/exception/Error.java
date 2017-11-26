@@ -2,36 +2,26 @@ package com.awaken.common.exception;
 
 public class Error {
 
-    private int messageCode;
+    private int msgno;
 
-    private int exceptionCode;
-
-    private String[] embeddedValues;
+    private int errno;
 
     private String message;
 
-    public int getMessageCode() {
-        return messageCode;
+    public int getErrno() {
+        return errno;
     }
 
-    public void setMessageCode(int messageCode) {
-        this.messageCode = messageCode;
+    public void setErrno(int errno) {
+        this.errno = errno;
     }
 
-    public int getExceptionCode() {
-        return exceptionCode;
+    public int getMsgno() {
+        return msgno;
     }
 
-    public void setExceptionCode(int exceptionCode) {
-        this.exceptionCode = exceptionCode;
-    }
-
-    public String[] getEmbeddedValues() {
-        return embeddedValues;
-    }
-
-    public void setEmbeddedValues(String[] embeddedValues) {
-        this.embeddedValues = embeddedValues;
+    public void setMsgno(int msgno) {
+        this.msgno = msgno;
     }
 
     public String getMessage() {

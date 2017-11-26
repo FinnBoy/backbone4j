@@ -1,6 +1,7 @@
-package com.awaken.common.util;
+package com.awaken.common.tool;
 
 import com.awaken.common.exception.AssertException;
+import com.awaken.common.util.ObjectUtil;
 
 import java.util.Collection;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class Assert {
     }
 
     public static void hasText(String text, String message) {
-        isTrue(Judge.hasText(text), message);
+        isTrue(Judge.isNotBlank(text), message);
     }
 
     public static void hasText(String text) {

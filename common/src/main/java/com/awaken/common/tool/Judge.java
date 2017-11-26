@@ -1,4 +1,7 @@
-package com.awaken.common.util;
+package com.awaken.common.tool;
+
+import com.awaken.common.util.CollectionUtil;
+import com.awaken.common.util.StringUtil;
 
 import java.util.Collection;
 import java.util.Map;
@@ -45,8 +48,12 @@ public class Judge {
         return !isEmpty(objects);
     }
 
-    public static boolean hasText(String string) {
-        return StringUtil.hasText(string);
+    public static boolean isBlank(String string) {
+        return StringUtil.isBlank(string);
+    }
+
+    public static boolean isNotBlank(String string) {
+        return StringUtil.isNotBlank(string);
     }
 
     public static boolean isInstance(Class<?> type, Object obj) {
